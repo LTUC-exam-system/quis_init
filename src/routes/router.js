@@ -2,10 +2,10 @@
 
 const express=require('express');
 const router=express.Router();
-const user=require('./models/userCollection');
-const basicAuth=require('./middleware/basic');
-const bearer=require('./middleware/bearer');
-const authorized=require('./middleware/authorize')
+const user=require('../models/userCollection');
+const basicAuth=require('../middleware/basic');
+const bearer=require('../middleware/bearer');
+const authorized=require('../middleware/authorize')
 
 router.post('/signup',bearer,authorized('add-user'),(req,res,next)=>{
     // console.log(req.body)
