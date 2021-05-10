@@ -1,6 +1,6 @@
 'use strict';
 
-const users=require('../models/userCollection');
+const users=require('../models/users/userCollection');
 
 module.exports=(req,res,next)=>{
     if(!req.headers.authorization){next('not logged in yet');return;};

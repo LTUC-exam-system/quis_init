@@ -2,7 +2,8 @@
 
 const mongoose = require('mongoose');
 const server = require('./src/server.js');
-require('dotenv').config();
+
+require ('dotenv').config();
 
 const MONGODB_URL = process.env.MONGODB_URL;
 

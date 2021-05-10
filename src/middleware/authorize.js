@@ -1,5 +1,5 @@
 'use strict';
-const users=require('../models/userCollection');
+const users=require('../models/users/userCollection');
 
 module.exports=(capability)=>{
     return(req,res,next)=>{

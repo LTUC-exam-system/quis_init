@@ -3,7 +3,7 @@
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const schema=require('./userSchema');
-const Model=require('./userModel');
+const Model=require('../../mongo-model');
 require ('dotenv').config();
 let SECRET =process.env.SECRET;
 
@@ -64,10 +64,23 @@ class User extends Model{
   }
 }
 let user = new User
+// // // setTimeout(function(){
+// // //   user.save({
+// // //     username:"admin",
+// // //     useremail:"admin@admin.com",
+// // //     password:"123",
+// // //     role:"admin"
+// // //   })
+// // // },1000)
 user.save({
   username:"admin",
   useremail:"admin@admin.com",
-  password:"123",
+  password:"admin",
   role:"admin"
-})
+}).then(result=>{
+  
+  // user.generateToken(result).then(users=>{
+  //   console.log("setUpToken:",users)
+  // }).catch(err=>console.error(err))
+}).catch(err=>console.error('error from first insertion'))
 module.exports= new User;
