@@ -1,29 +1,24 @@
+
 'use strict';
-
-//collection
-class Model {
-
-    constructor(schema) {
-        this.schema = schema;
+class Model{
+    constructor(schema){
+        this.schema=schema;
     }
-
-    create(record) {
-        let newRecord = new this.schema(record);
+    get(record){
+        if (!record){
+            record={};
+        }
+        return this.schema.find(record);
+    }
+    create(record){
+        const newRecord=new this.schema(record);
         return newRecord.save();
     }
-
-    get(_id) {
-        let obj = _id ? {_id} : {};
-        return this.schema.find(obj); // [{}]
+    update(_id,record){
+        return this.schema.findByIdAndUpdate(_id,record,{new:true});
     }
-
-    update(_id, record) {
-        return this.schema.findByIdAndUpdate(_id, record);
-    }
-
-    delete(_id) {
-        return this.schema.findByIdAndDelete(_id);
+    delete(_id){
+        returnthis.model.findByIdAndDelete(_id);
     }
 }
-
-module.exports = Model;
+module.exports=Model;

@@ -63,24 +63,11 @@ class User extends Model{
     }
   }
 }
-let user = new User
-// // // setTimeout(function(){
-// // //   user.save({
-// // //     username:"admin",
-// // //     useremail:"admin@admin.com",
-// // //     password:"123",
-// // //     role:"admin"
-// // //   })
-// // // },1000)
-user.save({
-  username:"admin",
-  useremail:"admin@admin.com",
-  password:"admin",
-  role:"admin"
-}).then(result=>{
-  
-  // user.generateToken(result).then(users=>{
-  //   console.log("setUpToken:",users)
-  // }).catch(err=>console.error(err))
-}).catch(err=>console.error('error from first insertion'))
+// let user = new User
+// user.save({
+//   username:"admin",
+//   useremail:"admin@admin.com",
+//   password:"123",
+//   role:"admin"
+// })
 module.exports= new User;
