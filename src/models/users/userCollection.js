@@ -12,7 +12,7 @@ class User extends Model{
         super(schema);
     }
    async save(record){
-      let object= await this.get({username:record.username});
+      let object= await this.get({useremail:record.useremail});
       console.log(object);
       if(object.length==0){
           record.password=await bcrypt.hash(record.password,5);
@@ -23,7 +23,7 @@ class User extends Model{
       }
     }
    async authenticate(user,password){
-     let record= await this.get({username:user});
+     let record= await this.get({useremail:user});
      if (record){
          await bcrypt.compare(password,record[0].password);
          return record[0];
@@ -31,13 +31,13 @@ class User extends Model{
      return Promise.reject();
     }
     async generateToken(user){ 
-     let token= jwt.sign({username:user.username,role:user.role},SECRET);
+     let token= jwt.sign({useremail:user.useremail,role:user.role},SECRET);
       return token; 
     }
     async authenticateToken(token){
        
            let tokenObj=await jwt.verify(token,SECRET);
-           let object= await this.get({username:tokenObj.username});
+           let object= await this.get({useremail:tokenObj.useremail});
          //    console.log('object from authentication=====>>',object);
            if(object.length >=0){
             return object[0]

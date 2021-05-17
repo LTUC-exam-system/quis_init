@@ -5,7 +5,7 @@ const router=express.Router();
 const user=require('../models/users/userCollection');
 const basicAuth=require('../middleware/basic');
 const bearer=require('../middleware/bearer');
-const authorized=require('../middleware/authorize')
+const authorized=require('../middleware/authorize');
 
 router.post('/setup',(req,res,next)=>{
     // console.log(req.body)
@@ -16,10 +16,10 @@ router.post('/setup',(req,res,next)=>{
             //add header
             res.status(200).send({token:result});
         }).catch(err=>next('invalid log'))
-    })
+    }).catch(err=>res.status(403).send("error in creating the user object"));
 });
 
-router.post('/signup',bearer,authorized('add-user'),(req,res,next)=>{
+router.post('/adduser',bearer,authorized('add-user'),(req,res,next)=>{
     // console.log(req.body)
     user.save(req.body)
     .then(users=>{
@@ -28,7 +28,7 @@ router.post('/signup',bearer,authorized('add-user'),(req,res,next)=>{
             //add header
             res.status(200).send({token:result});
         }).catch(err=>next('invalid log'))
-    }).catch(err=>res.status(403).send('creating user error'));
+    }).catch(err=>res.status(403).send("error in creating the user object"));
 });
 router.post('/signin',basicAuth,(req,res)=>{
     res.set('auth',req.token);
