@@ -8,6 +8,6 @@ let studentSchema = mongoose.Schema({
     nationallity: { type: String, required: true },
     nationlNumber: { type: String, required: false },
     mark: { type: Object, required: false },
-    firstEnterance: { type: Boolean, default:false, required:false}
+    firstEnterance: { type: Boolean, default: true, required: false }
 })
 module.exports = mongoose.model("Studens", studentSchema)
