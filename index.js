@@ -1,14 +1,19 @@
 'use strict';
-const mongoose =require('mongoose');
-const server =require('./server');
+
+const mongoose = require('mongoose');
+const server = require('./src/server.js');
+
 require ('dotenv').config();
 
-const MONGOOSE_URI=process.env.MONGOOSE_URI;
+const MONGODB_URL = process.env.MONGODB_URL;
 
-mongoose.connect(MONGOOSE_URI,{
+mongoose.connect(MONGODB_URL, {
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology:true,
     useFindAndModify:false 
-});
-server.start();
+  })
+  .then(() => {
+    server.start();
+  })
+  .catch((err) => console.log(err));
