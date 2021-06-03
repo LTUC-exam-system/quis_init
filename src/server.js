@@ -17,7 +17,7 @@ server.use(morgan('dev'));
 server.use('/students', sturdentsRoutes)
 // server.use('/', router);
 // server.use('/', routerQ);
-// server.use('/', routerOp);
+server.use('/', routerOp);
 server.get('/errorRoute', (req, res) => {
     throw new Error('this route is 500 status')
 })
