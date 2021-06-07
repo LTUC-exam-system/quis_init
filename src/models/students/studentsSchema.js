@@ -10,4 +10,4 @@ let studentSchema = mongoose.Schema({
     mark: { type: Object, required: false },
     firstEnterance: { type: Boolean, default: true, required: false }
 })
-module.exports = mongoose.model("Studens", studentSchema)
+module.exports = mongoose.model("Students", studentSchema)

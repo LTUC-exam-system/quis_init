@@ -37,10 +37,52 @@ router.post('/addStudentsData', async (req, res) => {
 
     return res.status(200).json({ success: true, data });
 })
+router.post('/addStudentsDatatest', async (req, res) => {
+    let studentsData = JSON.parse(req.body.data);
+    // let studentsDataWithID = [];
+    const studentsDataWithID = studentsData.map((val, i) => {
+        console.log(i)
+        return studentColletion.create({
+            firstName: studentsData[i][0],
+            lastName: studentsData[i][1],
+            email: studentsData[i][2],
+            birthDate: studentsData[i][3],
+            nationallity: studentsData[i][4],
+            nationlNumber: studentsData[i][5],
+            mark: studentsData[i][6],
+        })
+
+        console.log(savedStudentInfo._id)
+        studentsDataWithID.push({
+            First_Name: studentsData[i][0],
+            Last_Name: studentsData[i][1],
+            Email: studentsData[i][2],
+            BirthDate: studentsData[i][3],
+            Nationallity: studentsData[i][4],
+            NationlNumber: studentsData[i][5],
+            Mark: studentsData[i][6],
+            ID: savedStudentInfo._id
+        })
+
+    })
+    if (studentsDataWithID.length > 0) {
+        console.log('test', studentsDataWithID)
+        let newWorkingBook = xlsx.utils.book_new();
+        let newWorkingSheet = xlsx.utils.json_to_sheet(studentsDataWithID) // the one after edit should be passed in here
+        xlsx.utils.book_append_sheet(newWorkingBook, newWorkingSheet, "new something");
+        xlsx.writeFile(newWorkingBook, "src/routes/studentsInfo.xlsx");
+    }
+    // setTimeout(() => {
+    //     console.log("students data", studentsSheetRow)
+    // }, 3000)
+
+
+
+})
 
     .put("/updateMark", (req, res) => {
         console.log(req.body)
-        
+
     })
 
 module.exports = router;
