@@ -7,6 +7,7 @@ const server= express();
 const router= require('./routes/router');
 const routerQ = require('./routes/options.js');
 const routerOp = require('./routes/questions.js');
+const routerStd = require('./routes/students');
 const notFound = require('./middleware/404');
 const errorHandle = require('./middleware/500');
 
@@ -17,6 +18,7 @@ const errorHandle = require('./middleware/500');
  server.use('/',router);
  server.use('/', routerQ);
  server.use('/', routerOp);
+ server.use('/',routerStd);
 
  server.get('/errorRoute',(req,res)=>{
      throw new Error('this route is 500 status')

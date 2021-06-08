@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="file" id="real-file">
+    <button type="button" id="custon-button">Choose a file</button>
+    <span id="custom-text">No file choosen yet</span>
+</body>
+<script>
+const realFileBtn=document.getElementById('real-file');
+const customBtn=document.getElementById('custon-button');
+const customTxt=document.getElementById('custom-text');
+
+customBtn.addEventListener('click',e=>{
+ realFileBtn.click();
+});
+realFileBtn.addEventListener('change',function(){
+    console.log( console.log(this.files[0].fullPath))
+    if(realFileBtn.value){
+        customTxt.innerHTML=realFileBtn.value
+    }
+})
+
+</script>
+</html>
