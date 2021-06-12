@@ -42,4 +42,5 @@ router.get('/users',bearer,authorized('reade'),(req,res)=>{
     });
 });
 
+
 module.exports=router;

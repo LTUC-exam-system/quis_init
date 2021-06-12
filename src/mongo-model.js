@@ -10,6 +10,12 @@ class Model{
         }
         return this.schema.find(record);
     }
+    getById(_id){
+        if (!_id){
+            _id={};
+        }
+        return this.schema.findOne({_id});
+    }
     create(record){
         const newRecord=new this.schema(record);
         return newRecord.save();

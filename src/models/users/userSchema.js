@@ -6,7 +6,6 @@ const user=mongoose.Schema({
     username: {type: String, required: true ,},
     useremail:{type: String, required:true ,unique:true,
         validate: {
-            // isAsync: true,
             validator: async(value, isValid)=>{
                 try{
                 const self = this;
