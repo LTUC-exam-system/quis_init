@@ -9,7 +9,8 @@ const bearer=require('../middleware/bearer');
 const authorized=require('../middleware/authorize');
 const MY_second_NAMESPACE = '21e0187f-869e-4bfe-9188-6ec3a8c2cef4';
 
-router.post('/addStudentsData', async (req, res) => {
+
+router.post('/addStudentsData',bearer,authorized("create"), async (req, res) => {
     let wb = xlsx.readFile('src/routes/studentsInfo.xlsx', { cellDates: true });
     // console.log(wb.SheetNames) // this will give an aray of the topics bellow to the left
     // the option Celldata:true is to show the date in the excel sheet as js date
@@ -41,7 +42,7 @@ router.post('/addStudentsData', async (req, res) => {
 
     return res.status(200).send(data);
 })
-router.post('/addStudentsDatatest', async (req, res) => {
+router.post('/addStudentsDatatest',bearer,authorized("create") ,async (req, res) => {
     let studentsData = JSON.parse(req.body.data);
     // let studentsDataWithID = [];
     const studentsDataWithID = studentsData.map((val, i) => {
@@ -85,7 +86,7 @@ router.post('/addStudentsDatatest', async (req, res) => {
 
 })
 
-router.put("/updateMark/:id", async (req, res) => {
+router.put("/updateMark/:id", bearer,authorized("update"),async (req, res) => {
         console.log(req.body)
         let id = req.params.id;
         let data= await studentColletion.get(id)[0];
@@ -94,7 +95,7 @@ router.put("/updateMark/:id", async (req, res) => {
         res.status(200).json(results[0]);
  })
 
-router.put('/firstenter/:id', async(req, res) => {
+router.put('/firstenter/:id',bearer,authorized("update"), async(req, res) => {
     let id = req.params.id;
    let data= await studentColletion.get(id)[0];
    if(data.firstEnterance===false){
@@ -106,11 +107,11 @@ router.put('/firstenter/:id', async(req, res) => {
    }
 });
 
-router.get('/students',async(req, res) => {
+router.get('/students',bearer,authorized("read"),async(req, res) => {
     let data= await studentColletion.get();
     res.status(200).send(data);
 });
-router.put('/generaterefcode/:id',async(req,res)=>{
+router.put('/generaterefcode/:id',bearer,authorized("update"),async(req,res)=>{
      const id=req.params.id;
      let data= await studentColletion.getById(id);
      console.log(data)
@@ -120,7 +121,7 @@ router.put('/generaterefcode/:id',async(req,res)=>{
 
 
 });
-router.post('/onestudent',async(req,res)=>{
+router.post('/onestudent',bearer,authorized("create"),async(req,res)=>{
     const data= await studentColletion.saveNew(req.body);
     res.status(201).json(data);
   
