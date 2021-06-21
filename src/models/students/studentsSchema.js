@@ -11,7 +11,7 @@ let studentSchema = new mongoose.Schema({
     birthDate: { type: String, required: false },
     nationallity: { type: String, required: true },
     nationlNumber: { type: String, required: false },
-    mark: { type: Object, required: false },
+    mark: { type: Number, required: false ,default: 0 },
     firstEnterance: { type: Boolean, default: true, required: false },
     refcode:{type:String,required:false,}
 });
