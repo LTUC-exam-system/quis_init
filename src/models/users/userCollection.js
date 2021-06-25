@@ -47,9 +47,9 @@ class User extends Model{
     roleCapability(role){
       switch(role){
         case 'admin':
-          return ['reade','create','update','delete','add-user'];
+          return ['read','create','update','delete','add-user'];
         case 'user':
-          return ['reade','create','update','delete'];
+          return ['read','create','update','delete'];
         default:
           return null;  
       }
