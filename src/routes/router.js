@@ -34,7 +34,7 @@ router.post('/signin',basicAuth,(req,res)=>{
     res.set('auth',req.token);
     res.cookie('token',req.token);
     // console.log('user from sign in-----',req.user);
-    res.status(200).send({token:req.token,user:req.user});
+    res.status(200).send({token:req.token,user:req.user,permissions:user.roleCapability(req.user.role)});
 });
 router.get('/users',bearer,authorized('reade'),(req,res)=>{
     user.get().then((result)=>{
